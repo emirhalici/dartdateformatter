@@ -1,6 +1,6 @@
 import HomePage from 'pages/Home'
 import { PropsWithChildren, Suspense } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import LoadingOrError from './Avatar/LoadingOrError'
 
 export default function App() {
@@ -19,7 +19,7 @@ export default function App() {
 
 function AppWrapper(props: PropsWithChildren) {
   return (
-    <div className="relative overflow-hidden bg-white dark:bg-neutral-950">
+    <div className="relative overflow-hidden bg-gradient-light dark:bg-gradient-dark">
       <div className="h-screen sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
         {props.children}
       </div>
