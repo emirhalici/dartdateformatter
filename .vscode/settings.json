@@ -4,5 +4,6 @@
   },
   "files.associations": {
     "*.css": "tailwindcss"
-  }
+  },
+  "editor.indentSize": 2
 }
