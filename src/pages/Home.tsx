@@ -7,7 +7,7 @@ function HomePage() {
     <div
       className={classNames(
         'flex flex-col items-center self-center',
-        'px-4  sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
+        'px-4 sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
       )}
     >
       <Header />
