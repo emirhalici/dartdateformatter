@@ -1,4 +1,5 @@
-import { PropsWithChildren } from 'react'
+import Card from 'components/Card'
+import Header from 'components/Header'
 import { classNames } from 'utils'
 
 function HomePage() {
@@ -21,34 +22,6 @@ function HomePage() {
         </p>
         <div className="relative inline-block w-64" />
       </Card>
-    </div>
-  )
-}
-
-function Card(props: PropsWithChildren) {
-  return (
-    <div
-      className={classNames(
-        'rounded-lg',
-        'shadow-lg dark:shadow-gray-900',
-        'bg-white dark:bg-gray-500',
-        'px-6 py-6'
-      )}
-    >
-      {props.children}
-    </div>
-  )
-}
-
-function Header() {
-  return (
-    <div className="flex w-full flex-col pr-10">
-      <h1 className="text-5xl font-bold text-slate-800">Dart Date Formatter</h1>
-      <h2 className="pb-8 pt-4 text-2xl text-slate-800">
-        {
-          "Easily find the Date format you're looking for in Dart&Flutter applications! "
-        }
-      </h2>
     </div>
   )
 }
