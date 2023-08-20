@@ -1,75 +1,56 @@
-import Avatar from 'components/Avatar'
-
-const randoms = [
-  [1, 2],
-  [3, 4, 5],
-  [6, 7]
-]
+import { PropsWithChildren } from 'react'
+import { classNames } from 'utils'
 
 function HomePage() {
   return (
-    <div className="relative mx-auto max-w-7xl px-4 sm:static sm:px-6 lg:px-8">
-      <Welcome />
-      <div className="my-10">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none mt-10 md:mt-0 lg:absolute lg:inset-y-0 lg:mx-auto lg:w-full lg:max-w-7xl"
-        >
-          <div className="absolute sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8">
-            <div className="flex items-center space-x-6 lg:space-x-8">
-              {randoms.map((random, number) => (
-                <div
-                  key={`random-${random[number]}`}
-                  className="grid shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8"
-                >
-                  {random.map((number) => (
-                    <div
-                      key={`random-${number}`}
-                      className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100"
-                    >
-                      <img
-                        src={`https://picsum.photos/600?random=${number}`}
-                        alt=""
-                        className="h-full w-full bg-indigo-100 object-cover object-center dark:bg-neutral-900"
-                      />
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
+    <div
+      className={classNames(
+        'flex flex-col items-center self-center',
+        'px-4  sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
+      )}
+    >
+      <Header />
+      <Card>
+        <div className="mb-2 text-xl font-bold dark:text-white">
+          The Coldest Sunset
         </div>
-      </div>
+        <p className="text-base text-gray-700 dark:text-gray-200">
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
+          quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
+          nihil.
+        </p>
+        <div className="relative inline-block w-64" />
+      </Card>
     </div>
   )
+}
 
-  function Welcome() {
-    return (
-      <div className="sm:max-w-lg">
-        <div className="my-4">
-          <Avatar
-            size="large"
-            src="https://www.gravatar.com/avatar/4405735f6f3129e0286d9d43e7b460d0"
-          />
-        </div>
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-200 sm:text-6xl">
-          Welcome!
-        </h1>
-        <p className="mt-4 text-xl text-gray-500 dark:text-gray-400">
-          This is a boilerplate build with Vite, React 18, TypeScript, Vitest,
-          Testing Library, TailwindCSS 3, Eslint and Prettier.
-        </p>
-        <div className="my-10">
-          <a
-            href="vscode://"
-            className=" inline-block rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-center font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-700 focus:ring-offset-2"
-          >
-            Start building for free
-          </a>
-        </div>
-      </div>
-    )
-  }
+function Card(props: PropsWithChildren) {
+  return (
+    <div
+      className={classNames(
+        'rounded-lg',
+        'shadow-lg dark:shadow-gray-900',
+        'bg-white dark:bg-gray-500',
+        'px-6 py-6'
+      )}
+    >
+      {props.children}
+    </div>
+  )
+}
+
+function Header() {
+  return (
+    <div className="flex w-full flex-col pr-10">
+      <h1 className="text-5xl font-bold text-slate-800">Dart Date Formatter</h1>
+      <h2 className="pb-8 pt-4 text-2xl text-slate-800">
+        {
+          "Easily find the Date format you're looking for in Dart&Flutter applications! "
+        }
+      </h2>
+    </div>
+  )
 }
 
 export default HomePage
