@@ -1,10 +1,14 @@
 import Card from 'components/Card'
 import Header from 'components/Header'
 import InputField from 'components/InputField'
+import LocaleDropdown from 'components/LocaleDropdown'
 import ResultField from 'components/ResultField'
+import { useLocaleState } from 'hooks/LocaleHook'
 import { classNames } from 'utils'
 
 export default function HomePage() {
+  const { locale, localeName, setLocale } = useLocaleState('en')
+
   return (
     <div
       className={classNames(
@@ -21,6 +25,13 @@ export default function HomePage() {
           <InputField id="input-format" placeholder="%A, %b %d">
             Format
           </InputField>
+          <LocaleDropdown
+            selectedLocale={locale}
+            selectedLocaleName={localeName}
+            onChange={(newLocale) => {
+              setLocale(newLocale)
+            }}
+          />
           <ResultField>08/20/2023</ResultField>
         </form>
       </Card>
