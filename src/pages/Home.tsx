@@ -1,8 +1,9 @@
 import Card from 'components/Card'
 import Header from 'components/Header'
+import InputField from 'components/InputField'
 import { classNames } from 'utils'
 
-function HomePage() {
+export default function HomePage() {
   return (
     <div
       className={classNames(
@@ -12,18 +13,15 @@ function HomePage() {
     >
       <Header />
       <Card>
-        <div className="mb-2 text-xl font-bold dark:text-white">
-          The Coldest Sunset
-        </div>
-        <p className="text-base text-gray-700 dark:text-gray-200">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-          quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
-          nihil.
-        </p>
-        <div className="relative inline-block w-64" />
+        <form className="mb-0 space-y-6">
+          <InputField id="input-date" placeholder="08/20/2023 23:14PM">
+            Date
+          </InputField>
+          <InputField id="input-format" placeholder="%A, %b %d">
+            Format
+          </InputField>
+        </form>
       </Card>
     </div>
   )
 }
-
-export default HomePage
