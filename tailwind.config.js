@@ -10,8 +10,8 @@ module.exports = {
           'colors.gray.700'
         )}, ${theme('colors.gray.900')})`,
         'gradient-light': `linear-gradient(to bottom right, ${theme(
-          'colors.neutral.100'
-        )}, ${theme('colors.blue.200')})`
+          'colors.cyan.100'
+        )}, ${theme('colors.blue.300')})`
       })
     }
   },
