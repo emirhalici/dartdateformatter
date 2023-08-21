@@ -26,7 +26,7 @@ export default function TabHeader({ activeTab, setActiveTab }: TabHeaderProps) {
               buttonTextStyles,
               activeTab === tab ? activeTabStyles : inactiveTabStyles
             )}
-            onClick={() => setActiveTab(tab)}
+            onClick={() => setActiveTab(tab as TabType)}
           >
             {tabName}
           </button>
