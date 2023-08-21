@@ -1,6 +1,7 @@
 import Card from 'components/Card'
 import Header from 'components/Header'
 import InputField from 'components/InputField'
+import ResultField from 'components/ResultField'
 import { classNames } from 'utils'
 
 export default function HomePage() {
@@ -20,6 +21,7 @@ export default function HomePage() {
           <InputField id="input-format" placeholder="%A, %b %d">
             Format
           </InputField>
+          <ResultField>08/20/2023</ResultField>
         </form>
       </Card>
     </div>
