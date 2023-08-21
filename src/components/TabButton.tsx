@@ -1,4 +1,5 @@
 import { MouseEventHandler, PropsWithChildren } from 'react'
+import { classNames } from 'utils'
 
 type TabButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement> | undefined
@@ -9,10 +10,16 @@ export default function TabButton({
   onClick,
   isActive
 }: TabButtonProps) {
+  const tabButtonStyles =
+    'text-gray-900 bg-gray-100 focus:ring-4 focus:ring-blue-300 active focus:outline-none dark:bg-gray-700 dark:text-white'
+
   return (
     <button
       onClick={onClick}
-      className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
+      className={classNames([
+        'inline-block w-full p-4 bg-white hover:text-gray-700 hover:bg-gray-50 focus:ring-4 focus:ring-blue-300 focus:outline-none dark:hover:text-white dark:bg-gray-800 dark:hover:bg-gray-700',
+        isActive ? tabButtonStyles : ''
+      ])}
     >
       {children} {isActive}
     </button>

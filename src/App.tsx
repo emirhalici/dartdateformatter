@@ -22,7 +22,7 @@ function AppWrapper(props: PropsWithChildren) {
   return (
     <div
       className={classNames(
-        'overflow-hidden bg-gradient-light dark:bg-gradient-dark',
+        'bg-gradient-light dark:bg-gradient-dark',
         'h-screen pt-12 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40'
       )}
     >

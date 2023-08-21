@@ -13,7 +13,7 @@ export default function LocaleDropdown({
   return (
     <div className="w-1/2">
       <InputLabel id={'input-locale-dropdown'}>Locale</InputLabel>
-      <div className="relative">
+      <div className="relative mt-2">
         <select
           value={selectedLocale}
           onChange={(e) => onChange(e.target.value as keyof typeof locales)}
