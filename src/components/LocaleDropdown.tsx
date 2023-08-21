@@ -1,4 +1,5 @@
 import { locales } from 'utils'
+import InputLabel from './InputLabel'
 
 type LocaleDropdownProps = {
   selectedLocale: keyof typeof locales
@@ -7,19 +8,19 @@ type LocaleDropdownProps = {
 }
 export default function LocaleDropdown({
   selectedLocale,
-  selectedLocaleName,
   onChange
 }: LocaleDropdownProps) {
   return (
-    <div>
-      <p>Selected Locale: {selectedLocaleName}</p>
+    <div className="w-1/2">
+      <InputLabel id={'input-locale-dropdown'}>Locale</InputLabel>
       <select
         value={selectedLocale}
         onChange={(e) => onChange(e.target.value as keyof typeof locales)}
+        id="input-locale-dropdown"
       >
-        {Object.keys(locales).map((key) => (
-          <option key={key} value={key}>
-            {locales[key as keyof typeof locales]}
+        {Object.entries(locales).map(([locale, localeName]) => (
+          <option key={locale} value={locale}>
+            {`${locale} | ${localeName}`}
           </option>
         ))}
       </select>

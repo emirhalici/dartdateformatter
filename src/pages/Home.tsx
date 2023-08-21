@@ -28,9 +28,7 @@ export default function HomePage() {
           <LocaleDropdown
             selectedLocale={locale}
             selectedLocaleName={localeName}
-            onChange={(newLocale) => {
-              setLocale(newLocale)
-            }}
+            onChange={setLocale}
           />
           <ResultField>08/20/2023</ResultField>
         </form>
