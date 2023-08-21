@@ -83,3 +83,10 @@ export const locales = {
   zh: 'Chinese',
   zu: 'Zulu'
 }
+export const tabs: Record<string, string> = {
+  presets: 'Presets',
+  'build-your-own': 'Build Your Own',
+  reference: 'Reference'
+}
+
+export type TabType = keyof typeof tabs

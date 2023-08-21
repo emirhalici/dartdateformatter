@@ -3,11 +3,14 @@ import Header from 'components/Header'
 import InputField from 'components/InputField'
 import LocaleDropdown from 'components/LocaleDropdown'
 import ResultField from 'components/ResultField'
+import TabButton from 'components/TabButton'
 import { useLocaleState } from 'hooks/LocaleHook'
-import { classNames } from 'utils'
+import useTabState from 'hooks/TabHook'
+import { TabType, classNames, tabs } from 'utils'
 
 export default function HomePage() {
   const { locale, localeName, setLocale } = useLocaleState('en')
+  const [activeTab, setActiveTab] = useTabState()
 
   return (
     <div
@@ -32,6 +35,18 @@ export default function HomePage() {
           />
           <ResultField>08/20/2023</ResultField>
         </form>
+
+        <div className="flex w-full justify-start gap-4 pt-6">
+          {Object.entries(tabs).map(([tab, tabTitle]) => (
+            <TabButton
+              key={tab}
+              onClick={() => setActiveTab(tab as TabType)}
+              isActive={tab === activeTab}
+            >
+              {tabTitle}
+            </TabButton>
+          ))}
+        </div>
       </Card>
     </div>
   )
