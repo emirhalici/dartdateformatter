@@ -6,15 +6,23 @@ import ResultField from 'components/ResultField'
 import TabHeader from 'components/TabHeader'
 import { useLocaleState } from 'hooks/LocaleHook'
 import useTabState from 'hooks/TabHook'
-import { classNames } from 'utils'
+import { TabType, classNames } from 'utils'
+import BuildYourOwnTab from './BuildYourOwn'
+import PresetsTab from './Presets'
+import ReferenceTab from './Reference'
+
+const visibleTabStyles = 'mt-4 transition-all duration-300 ease-out'
+const shrunkTabStyles = 'h-0 py-0 opacity-0 mt-0'
 
 export default function HomePage() {
   const { locale, localeName, setLocale } = useLocaleState('en')
-  const [activeTab, setActiveTab] = useTabState()
+  const [activeTab, setActiveTab] = useTabState<TabType>()
 
   return (
     <div
       className={classNames(
+        'bg-gradient-light dark:bg-gradient-dark',
+        'pt-12 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40',
         'flex flex-col items-center self-center',
         'px-4 sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
       )}
@@ -37,7 +45,24 @@ export default function HomePage() {
         </form>
       </Card>
       <TabHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      <Card className="mt-4 ">Hello</Card>
+      <PresetsTab
+        className={classNames(
+          visibleTabStyles,
+          activeTab === 'presets' ? '' : shrunkTabStyles
+        )}
+      />
+      <BuildYourOwnTab
+        className={classNames(
+          visibleTabStyles,
+          activeTab === 'build-your-own' ? '' : shrunkTabStyles
+        )}
+      />
+      <ReferenceTab
+        className={classNames(
+          visibleTabStyles,
+          activeTab === 'reference' ? '' : shrunkTabStyles
+        )}
+      />
     </div>
   )
 }

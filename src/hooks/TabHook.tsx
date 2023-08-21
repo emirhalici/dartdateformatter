@@ -3,7 +3,7 @@ import { TabType, tabs } from 'utils'
 
 const defaultTab: TabType = 'presets'
 
-export default function useTabState(): [
+export default function useTabState<TabType>(): [
   TabType,
   Dispatch<SetStateAction<TabType>>
 ] {

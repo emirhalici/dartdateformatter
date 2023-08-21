@@ -19,14 +19,5 @@ export default function App() {
 }
 
 function AppWrapper(props: PropsWithChildren) {
-  return (
-    <div
-      className={classNames(
-        'bg-gradient-light dark:bg-gradient-dark',
-        'h-screen pt-12 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40'
-      )}
-    >
-      {props.children}
-    </div>
-  )
+  return <div className={classNames('')}>{props.children}</div>
 }
