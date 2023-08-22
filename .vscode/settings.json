@@ -6,5 +6,11 @@
   "files.associations": {
     "*.css": "tailwindcss"
   },
-  "editor.indentSize": 2
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", ".*Styles*"],
+  "editor.indentSize": 2,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2
 }

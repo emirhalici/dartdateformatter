@@ -78,3 +78,11 @@ pnpm run test:ui
 ## License
 
 This project is licensed under the MIT License.
+
+## Inspirations
+
+- [NSDateFormatter](https://nsdateformatter.com/#examples)
+
+- [For a Good Strftime](https://foragoodstrftime.com/#)
+
+- [Flutter DateFormat Cheat Sheet](https://andreygordeev.com/flutter-dateformat-cheat-sheet/#)

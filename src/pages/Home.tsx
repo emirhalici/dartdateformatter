@@ -1,29 +1,59 @@
 import Card from 'components/Card'
 import Header from 'components/Header'
-import { classNames } from 'utils'
+import InputField from 'components/InputField'
+import LocaleDropdown from 'components/LocaleDropdown'
+import ResultField from 'components/ResultField'
+import TabHeader from 'components/TabHeader'
+import { useLocaleState } from 'hooks/LocaleHook'
+import useTabState from 'hooks/TabHook'
+import { TabType, classNames } from 'utils'
+import BuildYourOwnTab from './BuildYourOwn'
+import PresetsTab from './Presets'
+import ReferenceTab from './Reference'
 
-function HomePage() {
+export default function HomePage() {
+  const { locale, localeName, setLocale } = useLocaleState('en')
+  const [activeTab, setActiveTab] = useTabState<TabType>()
+
   return (
     <div
       className={classNames(
+        'bg-gradient-light dark:bg-gradient-dark',
+        'pt-12 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40',
         'flex flex-col items-center self-center',
         'px-4 sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
       )}
     >
       <Header />
       <Card>
-        <div className="mb-2 text-xl font-bold dark:text-white">
-          The Coldest Sunset
-        </div>
-        <p className="text-base text-gray-700 dark:text-gray-200">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-          quia, nulla! Maiores et perferendis eaque, exercitationem praesentium
-          nihil.
-        </p>
-        <div className="relative inline-block w-64" />
+        <form className="mb-0 space-y-6">
+          <InputField id="input-date" placeholder="08/20/2023 23:14PM">
+            Date
+          </InputField>
+          <InputField id="input-format" placeholder="%A, %b %d">
+            Format
+          </InputField>
+          <LocaleDropdown
+            selectedLocale={locale}
+            selectedLocaleName={localeName}
+            onChange={setLocale}
+          />
+          <ResultField>08/20/2023</ResultField>
+        </form>
       </Card>
+      <TabHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+      <PresetsTab className={tabElementStyle(activeTab === 'presets')} />
+      <BuildYourOwnTab
+        className={tabElementStyle(activeTab === 'build-your-own')}
+      />
+      <ReferenceTab className={tabElementStyle(activeTab === 'reference')} />
     </div>
   )
 }
 
-export default HomePage
+const visibleTabStyles = 'mt-4 transition-all duration-300 delay-200 ease-out'
+const shrunkTabStyles = 'mt-0 h-0 py-0 opacity-0 hidden'
+
+function tabElementStyle(isActive: boolean): string {
+  return classNames(visibleTabStyles, isActive ? '' : shrunkTabStyles)
+}
