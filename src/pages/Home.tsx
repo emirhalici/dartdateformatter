@@ -1,3 +1,4 @@
+import DartBridge from 'DartBridge'
 import Card from 'components/Card'
 import Header from 'components/Header'
 import InputField from 'components/InputField'
@@ -6,14 +7,25 @@ import ResultField from 'components/ResultField'
 import TabHeader from 'components/TabHeader'
 import { useLocaleState } from 'hooks/LocaleHook'
 import useTabState from 'hooks/TabHook'
+import { useEffect, useState } from 'react'
 import { TabType, classNames } from 'utils'
 import BuildYourOwnTab from './BuildYourOwn'
 import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
 
 export default function HomePage() {
-  const { locale, localeName, setLocale } = useLocaleState('en')
+  const { locale, setLocale } = useLocaleState('en_ISO')
   const [activeTab, setActiveTab] = useTabState<TabType>()
+
+  const [dateValue, setDateValue] = useState('20/12/2020 13:10')
+  const [formatPatternValue, setFormatPatternValue] = useState('MM/dd/yyyy')
+
+  const [resultValue, setResultValue] = useState('')
+
+  useEffect(() => {
+    const result = DartBridge.formatUtcDate(formatPatternValue, dateValue)
+    setResultValue(result)
+  }, [dateValue, formatPatternValue])
 
   return (
     <div
@@ -27,18 +39,24 @@ export default function HomePage() {
       <Header />
       <Card>
         <form className="mb-0 space-y-6">
-          <InputField id="input-date" placeholder="08/20/2023 23:14PM">
+          <InputField
+            id="input-date"
+            placeholder="dd/MM/yyyy HH:mm"
+            value={dateValue}
+            onChange={(event) => setDateValue(event.target.value)}
+          >
             Date
           </InputField>
-          <InputField id="input-format" placeholder="%A, %b %d">
+          <InputField
+            id="input-format"
+            placeholder="MM/dd/yyyy"
+            value={formatPatternValue}
+            onChange={(event) => setFormatPatternValue(event.target.value)}
+          >
             Format
           </InputField>
-          <LocaleDropdown
-            selectedLocale={locale}
-            selectedLocaleName={localeName}
-            onChange={setLocale}
-          />
-          <ResultField>08/20/2023</ResultField>
+          <LocaleDropdown selectedLocale={locale} onChange={setLocale} />
+          <ResultField>{resultValue}</ResultField>
         </form>
       </Card>
       <TabHeader activeTab={activeTab} setActiveTab={setActiveTab} />

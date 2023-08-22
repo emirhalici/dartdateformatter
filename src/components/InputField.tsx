@@ -5,11 +5,15 @@ import InputLabel from './InputLabel'
 type InputFieldProps = {
   id: string
   placeholder?: string
+  value: string
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 } & PropsWithChildren
 export default function InputField({
   id,
   children,
-  placeholder
+  placeholder,
+  value,
+  onChange
 }: InputFieldProps) {
   return (
     <div className="w-full">
@@ -24,6 +28,8 @@ export default function InputField({
         id={id}
         type="text"
         placeholder={placeholder}
+        value={value}
+        onChange={onChange}
       />
     </div>
   )
