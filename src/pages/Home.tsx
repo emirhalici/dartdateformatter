@@ -11,9 +11,6 @@ import BuildYourOwnTab from './BuildYourOwn'
 import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
 
-const visibleTabStyles = 'mt-4 transition-all duration-300 ease-out'
-const shrunkTabStyles = 'h-0 py-0 opacity-0 mt-0'
-
 export default function HomePage() {
   const { locale, localeName, setLocale } = useLocaleState('en')
   const [activeTab, setActiveTab] = useTabState<TabType>()
@@ -45,24 +42,18 @@ export default function HomePage() {
         </form>
       </Card>
       <TabHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      <PresetsTab
-        className={classNames(
-          visibleTabStyles,
-          activeTab === 'presets' ? '' : shrunkTabStyles
-        )}
-      />
+      <PresetsTab className={tabElementStyle(activeTab === 'presets')} />
       <BuildYourOwnTab
-        className={classNames(
-          visibleTabStyles,
-          activeTab === 'build-your-own' ? '' : shrunkTabStyles
-        )}
+        className={tabElementStyle(activeTab === 'build-your-own')}
       />
-      <ReferenceTab
-        className={classNames(
-          visibleTabStyles,
-          activeTab === 'reference' ? '' : shrunkTabStyles
-        )}
-      />
+      <ReferenceTab className={tabElementStyle(activeTab === 'reference')} />
     </div>
   )
+}
+
+const visibleTabStyles = 'mt-4 transition-all duration-300 delay-200 ease-out'
+const shrunkTabStyles = 'mt-0 h-0 py-0 opacity-0 hidden'
+
+function tabElementStyle(isActive: boolean): string {
+  return classNames(visibleTabStyles, isActive ? '' : shrunkTabStyles)
 }
