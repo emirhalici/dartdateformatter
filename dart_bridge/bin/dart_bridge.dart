@@ -5,7 +5,7 @@ import 'package:dart_bridge/dart_bridge.dart' as implementation;
 import 'package:js/js.dart';
 
 @JS('formatUtcDate')
-external set _formatUtcDate(String Function(String format, int millisSinceEpochUtc) f);
+external set _formatUtcDate(String Function(String format, String dateInDayMonthYearHourMinuteFormat) f);
 
 @JS()
 external void formatUtcDate();

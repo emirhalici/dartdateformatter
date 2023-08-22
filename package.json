@@ -22,7 +22,8 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "dart-get-packages": "cd dart_bridge && dart pub get && cd ..",
     "dart-compile": "dart compile js dart_bridge/bin/dart_bridge.dart -o src/public/dart_bridge.js",
-    "dart": "pnpm dart-get-packages && pnpm dart-compile"
+    "dart": "pnpm dart-get-packages && pnpm dart-compile",
+    "dart-test": "cd dart_bridge && dart run test -p chrome test/dart_bridge_test.dart && cd .."
   },
   "dependencies": {
     "react": "^18.2.0",
