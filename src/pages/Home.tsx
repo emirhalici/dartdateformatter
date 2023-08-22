@@ -14,7 +14,7 @@ import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
 
 export default function HomePage() {
-  const { locale, localeName, setLocale } = useLocaleState('en')
+  const { locale, setLocale } = useLocaleState('en_ISO')
   const [activeTab, setActiveTab] = useTabState<TabType>()
 
   const [dateValue, setDateValue] = useState('20/12/2020 13:10')
@@ -55,11 +55,7 @@ export default function HomePage() {
           >
             Format
           </InputField>
-          <LocaleDropdown
-            selectedLocale={locale}
-            selectedLocaleName={localeName}
-            onChange={setLocale}
-          />
+          <LocaleDropdown selectedLocale={locale} onChange={setLocale} />
           <ResultField>{resultValue}</ResultField>
         </form>
       </Card>

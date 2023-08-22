@@ -1,12 +1,11 @@
+import DartBridge from 'DartBridge'
 import { useState } from 'react'
-import { locales } from 'utils'
-
-export const useLocaleState = (initialLocale: keyof typeof locales) => {
+export const locales = DartBridge.availableLocales()
+export const useLocaleState = (initialLocale: string) => {
   const [locale, setLocale] = useState(initialLocale)
 
   return {
     locale,
-    setLocale,
-    localeName: locales[locale]
+    setLocale
   }
 }
