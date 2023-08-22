@@ -23,9 +23,13 @@ export default function HomePage() {
   const [resultValue, setResultValue] = useState('')
 
   useEffect(() => {
-    const result = DartBridge.formatUtcDate(formatPatternValue, dateValue)
+    const result = DartBridge.formatUtcDateWithLocale(
+      formatPatternValue,
+      dateValue,
+      locale
+    )
     setResultValue(result)
-  }, [dateValue, formatPatternValue])
+  }, [dateValue, formatPatternValue, locale])
 
   return (
     <div

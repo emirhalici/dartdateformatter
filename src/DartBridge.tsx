@@ -4,6 +4,11 @@ type WindowWithDartBridge = {
     formatPattern: string,
     dateInDayMonthYearHourMinuteFormat: string
   ) => string
+  formatUtcDateWithLocale: (
+    formatPattern: string,
+    dateInDayMonthYearHourMinuteFormat: string,
+    locale: string
+  ) => string
 } & typeof window
 
 export default class DartBridge {
@@ -18,6 +23,18 @@ export default class DartBridge {
     return (window as WindowWithDartBridge).formatUtcDate(
       formatPattern,
       dateInDayMonthYearHourMinuteFormat
+    )
+  }
+
+  static formatUtcDateWithLocale(
+    formatPattern: string,
+    dateInDayMonthYearHourMinuteFormat: string,
+    locale: string
+  ): string {
+    return (window as WindowWithDartBridge).formatUtcDateWithLocale(
+      formatPattern,
+      dateInDayMonthYearHourMinuteFormat,
+      locale
     )
   }
 }
