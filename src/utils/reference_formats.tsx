@@ -152,31 +152,31 @@ const second: Reference[] = [
     description: 'The milliseconds.'
   }
 ]
-const timeZone: Reference[] = [
-  {
-    format: 'zzz',
-    description:
-      'The 3 letter name of the time zone. Falls back to GMT-08:00 (hour offset) if the name is not known.'
-  },
-  {
-    format: 'zzzz',
-    description:
-      'The expanded time zone name, falls back to GMT-08:00 (hour offset) if name is not known.'
-  },
-  {
-    format: 'ZZZZ',
-    description: 'Time zone with abbreviation and offset'
-  },
-  {
-    format: 'Z',
-    description:
-      'RFC 822 GMT format. Can also match a literal Z for Zulu (UTC) time.'
-  },
-  {
-    format: 'ZZZZZ',
-    description: 'ISO 8601 time zone format'
-  }
-]
+// const timeZone: Reference[] = [
+//   {
+//     format: 'zzz',
+//     description:
+//       'The 3 letter name of the time zone. Falls back to GMT-08:00 (hour offset) if the name is not known.'
+//   },
+//   {
+//     format: 'zzzz',
+//     description:
+//       'The expanded time zone name, falls back to GMT-08:00 (hour offset) if name is not known.'
+//   },
+//   {
+//     format: 'ZZZZ',
+//     description: 'Time zone with abbreviation and offset'
+//   },
+//   {
+//     format: 'Z',
+//     description:
+//       'RFC 822 GMT format. Can also match a literal Z for Zulu (UTC) time.'
+//   },
+//   {
+//     format: 'ZZZZZ',
+//     description: 'ISO 8601 time zone format'
+//   }
+// ]
 
 export const referenceCategories: ReferenceCategory[] = [
   {
@@ -206,9 +206,9 @@ export const referenceCategories: ReferenceCategory[] = [
   {
     category: 'Second',
     formats: second
-  },
-  {
-    category: 'Time Zone',
-    formats: timeZone
   }
+  // {
+  //   category: 'Time Zone',
+  //   formats: timeZone
+  // }
 ]
