@@ -1,36 +1,26 @@
-![reactjs-vite-tailwindcss-boilerplate](https://user-images.githubusercontent.com/16243531/217138979-b854309c-4742-4275-a705-f9fec5158217.jpg)
+# Dart Date Formatter
 
-# React Tailwindcss Boilerplate build with Vite
-
-This is a boilerplate build with Vite, React 18, TypeScript, Vitest, Testing Library, TailwindCSS 3, Eslint and Prettier.
-
-## What is inside?
-
-This project uses many tools like:
-
-- [Vite](https://vitejs.dev)
-- [ReactJS](https://reactjs.org)
-- [TypeScript](https://www.typescriptlang.org)
-- [Vitest](https://vitest.dev)
-- [Testing Library](https://testing-library.com)
-- [Tailwindcss](https://tailwindcss.com)
-- [Eslint](https://eslint.org)
-- [Prettier](https://prettier.io)
+Dart Date Formatter is a React project that helps you find the DateFormat you're looking for in your Dart/Flutter projects.
 
 ## Getting Started
 
 ### Install
 
-Create the project.
+Clone the project
 
 ```bash
-npx degit joaopaulomoraes/reactjs-vite-tailwindcss-boilerplate my-app
+git clone https://github.com/emirhalici/dartdateformatter.git
 ```
 
-Access the project directory.
+Go to project directory
 
 ```bash
-cd my-app
+cd dartcodeformatter
+```
+
+Make sure pnpm is [installed](https://pnpm.io/installation).
+```bash
+pnpm -v
 ```
 
 Install dependencies.
@@ -45,34 +35,17 @@ Serve with hot reload at <http://localhost:5173>.
 pnpm run dev
 ```
 
-### Lint
+## Available Commands
 
 ```bash
-pnpm run lint
-```
-
-### Typecheck
-
-```bash
-pnpm run typecheck
-```
-
-### Build
-
-```bash
-pnpm run build
-```
-
-### Test
-
-```bash
-pnpm run test
-```
-
-View and interact with your tests via UI.
-
-```bash
-pnpm run test:ui
+pnpm run dev # Runs with hot reload
+pnpm run build # Builds/bundles react project statically
+pnpm run serve # Previews project
+pnpm run lint # Runs ESlint for entire project
+pnpm run typecheck # Runs typecheck for entire project
+pnpm run dart-get-packages # Gets packages for Dart bridge (requires Dart to be installed)
+pnpm run dart-compile # Compile Dart bridge and outputs to public directory
+pnpm run dart-test # Runs tests for Dart bridge project
 ```
 
 ## License
@@ -82,7 +55,5 @@ This project is licensed under the MIT License.
 ## Inspirations
 
 - [NSDateFormatter](https://nsdateformatter.com/#examples)
-
 - [For a Good Strftime](https://foragoodstrftime.com/#)
-
 - [Flutter DateFormat Cheat Sheet](https://andreygordeev.com/flutter-dateformat-cheat-sheet/#)
