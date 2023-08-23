@@ -9,6 +9,7 @@ import { useLocaleState } from 'hooks/LocaleHook'
 import useTabState from 'hooks/TabHook'
 import { useEffect, useState } from 'react'
 import { TabType, classNames } from 'utils'
+import { Preset, presetFormats } from 'utils/preset_formats'
 import BuildYourOwnTab from './BuildYourOwn'
 import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
@@ -21,6 +22,7 @@ export default function HomePage() {
   const [formatPatternValue, setFormatPatternValue] = useState('MM/dd/yyyy')
 
   const [resultValue, setResultValue] = useState('')
+  const [presets, setPresets] = useState<Preset[]>([])
 
   useEffect(() => {
     const result = DartBridge.formatUtcDateWithLocale(
@@ -29,6 +31,23 @@ export default function HomePage() {
       locale
     )
     setResultValue(result)
+  }, [dateValue, formatPatternValue, locale])
+
+  useEffect(() => {
+    const computatedPresets: Preset[] = []
+    for (const presetFormat of presetFormats) {
+      const formattedDate = DartBridge.formatUtcDateWithLocale(
+        presetFormat,
+        dateValue,
+        locale
+      )
+      computatedPresets.push({
+        formattedDate,
+        format: presetFormat
+      })
+    }
+
+    setPresets(computatedPresets)
   }, [dateValue, formatPatternValue, locale])
 
   return (
@@ -64,7 +83,11 @@ export default function HomePage() {
         </form>
       </Card>
       <TabHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      <PresetsTab className={tabElementStyle(activeTab === 'presets')} />
+      <PresetsTab
+        className={tabElementStyle(activeTab === 'presets')}
+        presets={presets}
+        onPresetClick={setFormatPatternValue}
+      />
       <BuildYourOwnTab
         className={tabElementStyle(activeTab === 'build-your-own')}
       />
