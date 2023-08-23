@@ -17,7 +17,7 @@ export default function PresetsTab({
   return (
     <div
       className={classNames(
-        'rounded-lg shadow-lg dark:shadow-gray-900 bg-white dark:bg-gray-500 w-full px-6',
+        'rounded-lg shadow-lg dark:shadow-gray-900 bg-white dark:bg-gray-500 w-full',
         'my-0 py-0 px-0 mx-0',
         className
       )}
@@ -60,7 +60,9 @@ function PresetTile({
         )}
         onClick={onClick ? () => onClick(format) : undefined}
       >
-        <div className="text-left hover:cursor-auto">{formattedDate}</div>
+        <div className="m-auto text-left hover:cursor-auto">
+          {formattedDate}
+        </div>
         <div className="grow" />
         <div className="rounded-md bg-neutral-100 px-4 py-1 text-right hover:cursor-auto hover:bg-neutral-200">
           {format}
