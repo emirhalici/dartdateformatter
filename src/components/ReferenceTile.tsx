@@ -29,7 +29,7 @@ export default function ReferenceTile({
       <p className="order-3 my-auto w-full grow lg:order-2 lg:mr-6 lg:w-1/2">
         {description}
       </p>
-      <p className="order-2 my-4 w-fit rounded-md bg-theme-accent-200 px-4 py-1 hover:cursor-auto md:w-1/4 lg:order-3 lg:my-0">
+      <p className="order-2 my-4 w-fit rounded-md bg-theme-accent-200 px-4 py-1 hover:cursor-auto lg:order-3 lg:my-auto lg:w-1/4">
         {format}
       </p>
     </div>
