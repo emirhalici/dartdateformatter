@@ -4,8 +4,8 @@ export default function Header() {
       <h1 className="flex text-5xl font-bold text-theme-primary-800">
         Dart Date Formatter
       </h1>
-      <h3 className="flex pb-8 pt-4 text-xl font-semibold text-gray-600">
-        Easy date formatting for Dart and Flutter. Uses&nbsp;
+      <div className="flex flex-row flex-wrap pb-8 pt-4 text-xl font-semibold text-gray-600">
+        <h3>Easy date formatting for Dart and Flutter. Uses&nbsp;</h3>
         <a
           href="https://api.flutter.dev/flutter/intl/DateFormat-class.html"
           className="text-blue-600 hover:underline dark:text-blue-500"
@@ -20,7 +20,7 @@ export default function Header() {
           intl
         </a>{' '}
         &nbsp;package.
-      </h3>
+      </div>
     </div>
   )
 }
