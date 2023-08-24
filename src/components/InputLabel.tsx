@@ -13,7 +13,7 @@ export default function InputLabel({
   return (
     <label
       className={classNames(
-        'block text-xs font-bold uppercase tracking-wide text-gray-700',
+        'block text-xs font-bold uppercase tracking-wide text-theme-primary-50',
         className
       )}
       htmlFor={id}

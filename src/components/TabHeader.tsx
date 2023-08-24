@@ -5,16 +5,11 @@ type TabHeaderProps = {
   setActiveTab: (tab: TabType) => void
 }
 
-const activeTabStyles = 'bg-white shadow-sm'
-const inactiveTabStyles = 'bg-slate-100 hover:bg-white hover:opacity-75'
-const buttonCommonStyles =
-  'w-full px-6 py-2 rounded-md transition-all  duration-300'
-const buttonTextStyles =
-  'block text-lg font-semibold tracking-wide text-slate-700'
+const activeTabStyles = 'bg-white text-theme-primary-600 font-extrabold'
 
 export default function TabHeader({ activeTab, setActiveTab }: TabHeaderProps) {
   return (
-    <div className="mt-4 flex w-full flex-row justify-start space-x-4 rounded-md bg-slate-100 p-1 shadow-md">
+    <div className="mt-4 flex w-full flex-row justify-start space-x-4">
       {Object.entries(tabs).map(([tab, tabName], index) => {
         const tabId = `tab-${tab}`
         return (
@@ -22,9 +17,8 @@ export default function TabHeader({ activeTab, setActiveTab }: TabHeaderProps) {
             key={index}
             id={tabId}
             className={classNames(
-              buttonCommonStyles,
-              buttonTextStyles,
-              activeTab === tab ? activeTabStyles : inactiveTabStyles
+              'w-full px-6 py-2 rounded-md transition-all duration-300 block text-lg tracking-wide text-theme-primary-800 bg-theme-primary-50 shadow-sm hover:shadow-lg',
+              activeTab === tab && activeTabStyles
             )}
             onClick={() => setActiveTab(tab as TabType)}
           >

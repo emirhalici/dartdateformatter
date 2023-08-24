@@ -10,7 +10,7 @@ export default function Card(props: CardProps) {
       className={classNames(
         'rounded-lg',
         'shadow-lg dark:shadow-gray-900',
-        'bg-white dark:bg-gray-500',
+        'bg-gradient-to-b from-theme-primary-500 to-theme-primary-400',
         'w-full px-6 py-6',
         props.className
       )}

@@ -23,6 +23,10 @@ export default function PresetsTab({
         className
       )}
     >
+      <div className="rounded-t-lg bg-theme-accent-500 px-4 py-3 text-theme-accent-100">
+        Below, commonly used formats are listed. Clicking on a preset applies
+        the format to input date.
+      </div>
       {presets.map((preset, index) => (
         <div key={preset.format}>
           <PresetTile

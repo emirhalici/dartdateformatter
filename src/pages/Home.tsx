@@ -10,7 +10,12 @@ import useTabState from 'hooks/TabHook'
 import { useEffect, useState } from 'react'
 import { TabType, classNames } from 'utils'
 import { Preset, presetFormats } from 'utils/preset_formats'
-import BuildYourOwnTab from './BuildYourOwn'
+import {
+  FormattedReference,
+  FormattedReferenceCategory,
+  Reference,
+  referenceCategories
+} from 'utils/reference_formats'
 import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
 
@@ -24,6 +29,10 @@ export default function HomePage() {
   const [resultValue, setResultValue] = useState('')
   const [presets, setPresets] = useState<Preset[]>([])
 
+  const [referenceCategoriesValue, setReferenceCategoriesValue] = useState<
+    FormattedReferenceCategory[]
+  >([])
+
   useEffect(() => {
     const result = DartBridge.formatUtcDateWithLocale(
       formatPatternValue,
@@ -34,29 +43,52 @@ export default function HomePage() {
   }, [dateValue, formatPatternValue, locale])
 
   useEffect(() => {
-    const computatedPresets: Preset[] = []
+    const computedPreset: Preset[] = []
     for (const presetFormat of presetFormats) {
       const formattedDate = DartBridge.formatUtcDateWithLocale(
         presetFormat,
         dateValue,
         locale
       )
-      computatedPresets.push({
+      computedPreset.push({
         formattedDate,
         format: presetFormat
       })
     }
 
-    setPresets(computatedPresets)
+    setPresets(computedPreset)
   }, [dateValue, formatPatternValue, locale])
+
+  useEffect(() => {
+    function computeFormattedReference(
+      reference: Reference
+    ): FormattedReference {
+      return {
+        description: reference.description,
+        format: reference.format,
+        formattedDate: DartBridge.formatUtcDateWithLocale(
+          reference.format,
+          dateValue,
+          locale
+        )
+      }
+    }
+
+    const computedReferenceCategories: FormattedReferenceCategory[] =
+      referenceCategories.map((refCategory) => {
+        return {
+          category: refCategory.category,
+          formats: refCategory.formats.map(computeFormattedReference)
+        }
+      })
+
+    setReferenceCategoriesValue(computedReferenceCategories)
+  }, [dateValue, locale])
 
   return (
     <div
       className={classNames(
-        'bg-gradient-light dark:bg-gradient-dark',
-        'pt-12 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40',
-        'flex flex-col items-center self-center',
-        'px-4 sm:px-[5%] md:px-[10%] lg:px-[15%] xl:px-[20%]'
+        'flex flex-col items-center self-center px-4 pt-12 sm:px-[5%] sm:pb-40 sm:pt-24 md:px-[10%] lg:px-[15%] lg:pb-48 lg:pt-40 xl:px-[20%] bg-theme-background'
       )}
     >
       <Header />
@@ -88,10 +120,16 @@ export default function HomePage() {
         presets={presets}
         onPresetClick={setFormatPatternValue}
       />
-      <BuildYourOwnTab
-        className={tabElementStyle(activeTab === 'build-your-own')}
+      <ReferenceTab
+        className={tabElementStyle(activeTab === 'reference')}
+        referenceCategories={referenceCategoriesValue}
+        onReferenceClick={(referenceFormat) =>
+          setFormatPatternValue(
+            (existingFormat) => `${existingFormat} ${referenceFormat}`
+          )
+        }
       />
-      <ReferenceTab className={tabElementStyle(activeTab === 'reference')} />
+      <div className="h-10" />
     </div>
   )
 }
