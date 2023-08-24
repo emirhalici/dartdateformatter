@@ -12,6 +12,8 @@ export default function ReferenceTab({
   referenceCategories,
   onReferenceClick
 }: ReferenceTabProps) {
+  const totalFormatCount = referenceCategories.length
+
   return (
     <div
       className={classNames(
@@ -20,28 +22,57 @@ export default function ReferenceTab({
         className
       )}
     >
-      {referenceCategories.map((referenceCategory) => {
-        const totalFormatCount = referenceCategories.length
+      <div className="px-4 py-3">
+        Following reference samples are based on the input date. All reference
+        samples are updated if you change input date. Clicking on a reference
+        adds it to the selected format.
+      </div>
+      {referenceCategories.map((referenceCategory, categoryIndex) => {
         return (
-          <div key={referenceCategory.category}>
-            <div className="bg-slate-500 px-4 py-3 font-semibold text-slate-100">
-              {referenceCategory.category}
-            </div>
-            {referenceCategory.formats.map((preset, index) => (
-              <div key={preset.format}>
-                <ReferenceTile
-                  formattedDate={preset.formattedDate}
-                  format={preset.format}
-                  isLastTile={index >= totalFormatCount - 1}
-                  isFirstTile={index === 0}
-                  onClick={onReferenceClick}
-                  description={preset.description}
-                />
-              </div>
-            ))}
-          </div>
+          <ReferenceCategoryTile
+            key={referenceCategory.category}
+            referenceCategory={referenceCategory}
+            onReferenceClick={onReferenceClick}
+            categoryIndex={categoryIndex}
+            totalCategoryCount={totalFormatCount}
+          />
         )
       })}
+    </div>
+  )
+}
+
+type ReferenceCategoryTileProps = {
+  referenceCategory: FormattedReferenceCategory
+  onReferenceClick: (format: string) => void
+  categoryIndex: number
+  totalCategoryCount: number
+}
+function ReferenceCategoryTile({
+  referenceCategory,
+  onReferenceClick,
+  categoryIndex,
+  totalCategoryCount
+}: ReferenceCategoryTileProps) {
+  return (
+    <div key={referenceCategory.category}>
+      <div className="bg-theme-accent-500 px-4 py-3 font-semibold text-theme-accent-100">
+        {referenceCategory.category}
+      </div>
+      {referenceCategory.formats.map((preset, index, allFormats) => (
+        <ReferenceTile
+          key={preset.format}
+          formattedDate={preset.formattedDate}
+          format={preset.format}
+          isLastTile={
+            categoryIndex === totalCategoryCount - 1 &&
+            index == allFormats.length - 1
+          }
+          isFirstTile={index === 0}
+          onClick={onReferenceClick}
+          description={preset.description}
+        />
+      ))}
     </div>
   )
 }
