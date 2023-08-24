@@ -129,6 +129,7 @@ export default function HomePage() {
           )
         }
       />
+      <div className="h-10" />
     </div>
   )
 }
