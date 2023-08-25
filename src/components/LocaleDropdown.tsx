@@ -10,7 +10,7 @@ export default function LocaleDropdown({
   onChange
 }: LocaleDropdownProps) {
   return (
-    <div className="w-1/2">
+    <div className="w-full">
       <InputLabel id={'input-locale-dropdown'}>Locale</InputLabel>
       <div className="relative mt-2">
         <select

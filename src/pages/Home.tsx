@@ -89,24 +89,30 @@ export default function HomePage() {
     <div className="flex flex-col items-center self-center bg-theme-background px-4 pt-12 sm:px-[5%] sm:pt-24 md:px-[10%] lg:px-[15%] lg:pt-40 xl:px-[20%]">
       <Header />
       <Card>
-        <form className="mb-0 space-y-6">
-          <InputField
-            id="input-date"
-            placeholder="dd/MM/yyyy HH:mm"
-            value={dateValue}
-            onChange={(event) => setDateValue(event.target.value)}
-          >
-            Date
-          </InputField>
-          <InputField
-            id="input-format"
-            placeholder="MM/dd/yyyy"
-            value={formatPatternValue}
-            onChange={(event) => setFormatPatternValue(event.target.value)}
-          >
-            Format
-          </InputField>
-          <LocaleDropdown selectedLocale={locale} onChange={setLocale} />
+        <form className="space-y-6">
+          <div className="flex flex-col space-y-6 align-top md:flex-row md:space-x-6 md:space-y-0">
+            <InputField
+              id="input-date"
+              placeholder="dd/MM/yyyy HH:mm"
+              value={dateValue}
+              onChange={(event) => setDateValue(event.target.value)}
+            >
+              Date
+            </InputField>
+            <InputField
+              id="input-format"
+              placeholder="MM/dd/yyyy"
+              value={formatPatternValue}
+              onChange={(event) => setFormatPatternValue(event.target.value)}
+            >
+              Format
+            </InputField>
+          </div>
+          <div className="flex flex-row align-top md:space-x-6">
+            <LocaleDropdown selectedLocale={locale} onChange={setLocale} />
+            <div className="w-0 md:w-full" />
+          </div>
+
           <ResultField>{resultValue}</ResultField>
         </form>
       </Card>
