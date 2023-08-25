@@ -86,11 +86,7 @@ export default function HomePage() {
   }, [dateValue, locale])
 
   return (
-    <div
-      className={classNames(
-        'flex flex-col items-center self-center px-4 pt-12 sm:px-[5%] sm:pb-40 sm:pt-24 md:px-[10%] lg:px-[15%] lg:pb-48 lg:pt-40 xl:px-[20%] bg-theme-background'
-      )}
-    >
+    <div className="flex flex-col items-center self-center bg-theme-background px-4 pt-12 sm:px-[5%] sm:pt-24 md:px-[10%] lg:px-[15%] lg:pt-40 xl:px-[20%]">
       <Header />
       <Card>
         <form className="mb-0 space-y-6">
