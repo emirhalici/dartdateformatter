@@ -89,9 +89,6 @@ export default function HomePage() {
       <Header />
       <Card>
         <form className="space-y-6">
-          <p className="text-lg font-bold text-theme-primary-100">
-            {dateValue}
-          </p>
           <div className="flex flex-col space-y-6 align-top md:flex-row md:space-x-6 md:space-y-0">
             <InputField
               id="input-date"
