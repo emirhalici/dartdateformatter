@@ -2,6 +2,12 @@
 
 Dart Date Formatter is a React project that helps you find the DateFormat you're looking for in your Dart/Flutter projects.
 
+### Dart Bridge
+
+The actual formatting functionality is handled by Dart bridge, transpiled/compiled to Javascript. Built source file is imported as a module on [index.html](index.html), and adds the public API to window. For better type-safety, [DartBridge.tsx](src/DartBridge.tsx) has type definitions and function definitions that cast window. It isn't safe to call an exported API from window directly as typescript doesn't/can't know about the exposed API.
+
+----
+
 ## Getting Started
 
 ### Install
