@@ -1,6 +1,7 @@
-import { locales } from 'hooks/LocaleHook'
+import DartBridge from 'DartBridge'
 import InputLabel from './InputLabel'
 
+const locales = DartBridge.availableLocales()
 type LocaleDropdownProps = {
   selectedLocale: string
   onChange: (value: string) => void

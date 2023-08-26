@@ -5,9 +5,9 @@ import InputField from 'components/InputField'
 import LocaleDropdown from 'components/LocaleDropdown'
 import ResultField from 'components/ResultField'
 import TabHeader from 'components/TabHeader'
-import { useLocaleState } from 'hooks/LocaleHook'
+import useParamsState from 'hooks/StateParamsHook'
 import useTabState from 'hooks/TabHook'
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { TabType, classNames } from 'utils'
 import { Preset, presetFormats } from 'utils/preset_formats'
 import {
@@ -20,49 +20,24 @@ import PresetsTab from './Presets'
 import ReferenceTab from './Reference'
 
 export default function HomePage() {
-  const { locale, setLocale } = useLocaleState('en_ISO')
+  // State persisted in URL
+  const [locale, setLocale] = useParamsState('en_ISO', 'locale')
+  const [dateValue, setDateValue] = useParamsState('20/12/2020 13:10', 'date')
+  const [formatPatternValue, setFormatPatternValue] = useParamsState(
+    'MM/dd/yyyy',
+    'pattern'
+  )
+
   const [activeTab, setActiveTab] = useTabState<TabType>()
-
-  const [dateValue, setDateValue] = useState('20/12/2020 13:10')
-  const [formatPatternValue, setFormatPatternValue] = useState('MM/dd/yyyy')
-
+  // Computed/Derived state
   const [resultValue, setResultValue] = useState('')
   const [presets, setPresets] = useState<Preset[]>([])
-
   const [referenceCategoriesValue, setReferenceCategoriesValue] = useState<
     FormattedReferenceCategory[]
   >([])
 
-  useEffect(() => {
-    const result = DartBridge.formatUtcDateWithLocale(
-      formatPatternValue,
-      dateValue,
-      locale
-    )
-    setResultValue(result)
-  }, [dateValue, formatPatternValue, locale])
-
-  useEffect(() => {
-    const computedPreset: Preset[] = []
-    for (const presetFormat of presetFormats) {
-      const formattedDate = DartBridge.formatUtcDateWithLocale(
-        presetFormat,
-        dateValue,
-        locale
-      )
-      computedPreset.push({
-        formattedDate,
-        format: presetFormat
-      })
-    }
-
-    setPresets(computedPreset)
-  }, [dateValue, formatPatternValue, locale])
-
-  useEffect(() => {
-    function computeFormattedReference(
-      reference: Reference
-    ): FormattedReference {
+  const computeFormattedReference = useCallback(
+    (reference: Reference): FormattedReference => {
       return {
         description: reference.description,
         format: reference.format,
@@ -72,8 +47,32 @@ export default function HomePage() {
           locale
         )
       }
-    }
+    },
+    [dateValue, locale]
+  )
 
+  useEffect(() => {
+    setResultValue(
+      DartBridge.formatUtcDateWithLocale(formatPatternValue, dateValue, locale)
+    )
+  }, [dateValue, formatPatternValue, locale])
+
+  useEffect(() => {
+    const computedPreset = presetFormats.map((presetFormat) => {
+      return {
+        formattedDate: DartBridge.formatUtcDateWithLocale(
+          presetFormat,
+          dateValue,
+          locale
+        ),
+        format: presetFormat
+      }
+    })
+
+    setPresets(computedPreset)
+  }, [dateValue, formatPatternValue, locale])
+
+  useEffect(() => {
     const computedReferenceCategories: FormattedReferenceCategory[] =
       referenceCategories.map((refCategory) => {
         return {
@@ -83,13 +82,16 @@ export default function HomePage() {
       })
 
     setReferenceCategoriesValue(computedReferenceCategories)
-  }, [dateValue, locale])
+  }, [computeFormattedReference, dateValue, locale])
 
   return (
     <div className="flex flex-col items-center self-center bg-theme-background px-4 pt-12 sm:px-[5%] sm:pt-24 md:px-[10%] lg:px-[15%] lg:pt-40 xl:px-[20%]">
       <Header />
       <Card>
         <form className="space-y-6">
+          <p className="text-lg font-bold text-theme-primary-100">
+            {dateValue}
+          </p>
           <div className="flex flex-col space-y-6 align-top md:flex-row md:space-x-6 md:space-y-0">
             <InputField
               id="input-date"
